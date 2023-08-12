@@ -14,7 +14,7 @@ refs.select.classList.replace("breed-select-hidden", "breed-select");
 refs.select.addEventListener("change", breedSelection);
 
 fetchBreds().then((breeds) => {
-	console.log(breeds);
+	// console.log(breeds);
 	create(breeds);
 	selectCSS();
 	refs.loader.classList.replace("loader", "loader-hidden");
@@ -26,7 +26,7 @@ function breedSelection(e) {
 	refs.catInfo.innerHTML = "";
 	let id = refs.select.value;
 	fetchCatByBreed(id).then((prom) => {
-		console.log(prom);
+		// console.log(prom);
 		createCard(prom);
 		refs.catInfo.classList.replace("cat-info-hidden", "cat-info")
 		refs.loader.classList.replace("loader", "loader-hidden");
