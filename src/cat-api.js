@@ -1,3 +1,5 @@
+import Notiflix from 'notiflix';
+import { refs } from './index.js';
 
 export function fetchBreds() {
 	const url = "https://api.thecatapi.com/v1/breeds";
@@ -10,7 +12,8 @@ export function fetchBreds() {
 		}
 	}).then((resp) => {
 		if (!resp.ok) {
-			throw new Error(resp.statusText);
+			refs.loader.classList.replace("loader", "loader-hidden");
+			throw new Notiflix.Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
 		}
 		return resp.json();
 	});
@@ -20,10 +23,6 @@ export function fetchBreds() {
 export function fetchCatByBreed(breedId) {
 	const url = `https://api.thecatapi.com/v1/images/search/?breed_ids=${breedId}`;
 	const apiKey = "live_Q77ypHQymq0xDZDIHgyTFXXkDGXaZqgWXlRROAEigrSADGW3SLjyFsEMRUa8xY9H";
-
-	// const params = new URLSearchParams({
-	// 	breed_ids: breedId,
-	// });
 
 	const options = {
 		headers: {
@@ -36,7 +35,8 @@ export function fetchCatByBreed(breedId) {
 
 	return fetch(url, options).then((resp) => {
 		if (!resp.ok) {
-			throw new Error(resp.statusText);
+			refs.loader.classList.replace("loader", "loader-hidden");
+			throw new Notiflix.Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
 		}
 		return resp.json();
 	});

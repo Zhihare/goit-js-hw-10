@@ -4,20 +4,33 @@ import { fetchCatByBreed } from "./cat-api";
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 
-const refs = {
-	select: document.querySelector(".breed-select"),
-	catInfo: document.querySelector(".cat-info"),
+export const refs = {
+	select: document.querySelector(".breed-select-hidden"),
+	catInfo: document.querySelector(".cat-info-hidden"),
+	error: document.querySelector(".error"),
+	loader: document.querySelector(".loader"),
 }
-
+refs.select.classList.replace("breed-select-hidden", "breed-select");
 refs.select.addEventListener("change", breedSelection);
 
+fetchBreds().then((breeds) => {
+	console.log(breeds);
+	create(breeds);
+	selectCSS();
+	refs.loader.classList.replace("loader", "loader-hidden");
+});
+
 function breedSelection(e) {
+	refs.loader.classList.replace("loader-hidden", "loader");
 	e.preventDefault();
 	refs.catInfo.innerHTML = "";
 	let id = refs.select.value;
 	fetchCatByBreed(id).then((prom) => {
 		console.log(prom);
 		createCard(prom);
+		refs.catInfo.classList.replace("cat-info-hidden", "cat-info")
+		refs.loader.classList.replace("loader", "loader-hidden");
+
 	});
 }
 
@@ -43,12 +56,6 @@ function selectCSS() {
 		select: refs.select,
 	});
 }
-
-fetchBreds().then((breeds) => {
-	console.log(breeds);
-	create(breeds);
-	selectCSS();
-});
 
 
 function create(arr) {
