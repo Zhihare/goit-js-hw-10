@@ -1,0 +1,60 @@
+body {}
+
+span {
+	font-weight: 700;
+}
+
+.breed-select {
+	width: 20%;
+}
+
+.loader {}
+
+.error {}
+
+.cat-info {
+	max-width: 925px;
+
+}
+
+.cat-inform {
+	font-family: 'Dancing Script', cursive;
+	display: flex;
+	--b: 3px;
+	/* border thickness */
+	--s: .45em;
+	/* size of the corner */
+	--color: #373B44;
+
+	min-width: 600 px;
+	max-width: 1000 px;
+	padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+	color: var(--color);
+	--_p: var(--s);
+	background:
+		conic-gradient(from 90deg at var(--b) var(--b), #0000 90deg, var(--color) 0) var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+	transition: .3s linear, color 0s, background-color 0s;
+	outline: var(--b) solid #0000;
+	outline-offset: .6em;
+	font-size: 16px;
+
+	border: 0;
+}
+
+.cat-info-text {
+	display: flex;
+	flex-direction: column;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 30%;
+
+	background-color: #cccfd5;
+}
+
+.cat-photo {}
+
+.title-breed {}
+
+.inform-breed {}
+
+.temper {}
