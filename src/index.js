@@ -3,11 +3,12 @@ import { fetchBreds } from "./cat-api";
 import { fetchCatByBreed } from "./cat-api";
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
+import Notiflix from 'notiflix';
 
 export const refs = {
 	select: document.querySelector(".breed-select-hidden"),
 	catInfo: document.querySelector(".cat-info-hidden"),
-	error: document.querySelector(".error"),
+	error: document.querySelector(".error-hidden"),
 	loader: document.querySelector(".loader"),
 }
 refs.select.classList.replace("breed-select-hidden", "breed-select");
@@ -27,10 +28,17 @@ function breedSelection(e) {
 	let id = refs.select.value;
 	fetchCatByBreed(id).then((prom) => {
 		// console.log(prom);
-		createCard(prom);
-		refs.catInfo.classList.replace("cat-info-hidden", "cat-info")
-		refs.loader.classList.replace("loader", "loader-hidden");
-
+		if (prom.length > 0) {
+			createCard(prom);
+			refs.catInfo.classList.replace("cat-info-hidden", "cat-info")
+			refs.loader.classList.replace("loader", "loader-hidden");
+		}
+		else {
+			new Notiflix.Notify.info("Oops! There is no information about this breed yet!");
+			refs.catInfo.classList.replace("cat-info-hidden", "cat-info")
+			refs.loader.classList.replace("loader", "loader-hidden");
+			console.log("sorry");
+		}
 	});
 }
 
